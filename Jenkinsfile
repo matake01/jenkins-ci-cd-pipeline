@@ -27,7 +27,7 @@ pipeline {
 
       stage ('Test') {
         steps {
-          sh 'chmod +x scripts/integration-test.sh && ./scripts/integration-test.sh ${ARTIFACT}'
+          sh './scripts/integration-test.sh ${ARTIFACT}'
         }
       }
 
@@ -36,7 +36,7 @@ pipeline {
   	       branch 'master'
   	    }
         steps {
-          sh 'chmod +x scripts/deploy-dev.sh && ./scripts/deploy-dev.sh ${ARTIFACT}'
+          sh './scripts/deploy-dev.sh ${ARTIFACT}'
         }
       }
 
@@ -45,7 +45,7 @@ pipeline {
       	   branch 'release-*'
       	}
         steps {
-	         sh 'chmod +x scripts/deploy-staging.sh && ./scripts/deploy-staging.sh ${VERSION}.beta.${BUILD_NUMBER} ${GIT_BRANCH} ${ARTIFACT}'
+	         sh './scripts/deploy-staging.sh ${VERSION}.beta.${BUILD_NUMBER} ${GIT_BRANCH} ${ARTIFACT}'
         }
       }
     }
