@@ -3,7 +3,7 @@
 set -e
 set -o pipefail
 
-APP_DEV_DOMAIN_URL="<APP_DEV_DOMAIN_URL>"
+APP_DOMAIN_URL="<APP_DOMAIN_URL>"
 
 DOCKER_REPOSITORY=${1}
 DOCKER_REGISTRY="<DOCKER_REGISTRY>"
@@ -36,7 +36,7 @@ deploy_on_dev_server() {
 
 test_http_app_access () {
   printf " - Test HTTP application access.\n"
-  STATUS_CODE=$(curl -v -L --write-out %{http_code} --show-error --silent --output /dev/null "$")
+  STATUS_CODE=$(curl -v -L --write-out %{http_code} --show-error --silent --output /dev/null "$APP_DOMAIN_URL")
   if [ "$STATUS_CODE" -ne "200" ]; then
     printf "Failed to HTTP access deployment. Response Code: $STATUS_CODE\n" && exit 1
   fi

@@ -3,6 +3,8 @@
 set -e
 set -o pipefail
 
+APP_DOMAIN_URL="<APP_DOMAIN_URL>"
+
 VERSION=${1}
 BRANCH_NAME=${2}
 
@@ -61,7 +63,7 @@ create_and_push_tag_to_git() {
 }
 
 test_http_app_access() {
-  STATUS_CODE=$(curl -v -L --write-out %{http_code} --show-error --silent --output /dev/null "${APP_STAGING_DOMAIN}")
+  STATUS_CODE=$(curl -v -L --write-out %{http_code} --show-error --silent --output /dev/null "$APP_DOMAIN_URL")
   if [ "$STATUS_CODE" -ne "200" ]; then
     printf "Failed to HTTP access deployment. Response Code: $STATUS_CODE\n" && exit 1
   fi
