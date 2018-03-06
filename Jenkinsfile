@@ -27,7 +27,7 @@ pipeline {
 
       stage ('Test') {
         steps {
-          sh 'chmod +x scripts/integration-test.sh && ./scripts/integration-test.sh'
+          sh 'chmod +x scripts/integration-test.sh && ./scripts/integration-test.sh ${ARTIFACT}'
         }
       }
 

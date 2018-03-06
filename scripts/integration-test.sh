@@ -3,7 +3,7 @@
 set -e
 set -o pipefail
 
-IMAGE=${ARTIFACT}
+IMAGE=${1}
 
 DOCKER_APP_PORT='8080'
 DOCKER_APP_CONTAINER_NAME='app'
