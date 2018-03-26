@@ -27,7 +27,7 @@ deploy_on_dev_server() {
     docker logout && docker login -u $DOCKER_REGISTRY_USERNAME -p $DOCKER_REGISTRY_PASSWORD $DOCKER_REGISTRY_URL && \
     docker ps -a | awk '{ print \$1,\$2 }' | grep $DOCKER_REPOSITORY | awk '{ print \$1 }' | xargs -I {} docker stop {} && \
     docker ps -a | awk '{ print \$1,\$2 }' | grep $DOCKER_REPOSITORY | awk '{ print \$1 }' | xargs -I {} docker rm {} && \
-    docker rmi --force $DOCKER_IMAGE && docker pull $DOCKER_IMAGE && \
+    docker pull $DOCKER_IMAGE && \
     docker run -p 8080:8080 \
     --name $DOCKER_REPOSITORY \
     -d $DOCKER_IMAGE

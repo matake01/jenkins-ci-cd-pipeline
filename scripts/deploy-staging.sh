@@ -49,7 +49,7 @@ deploy_on_staging_server() {
     docker logout && docker login -u <DOCKER_HUB_USERNAME> -p <DOCKER_HUB_PASSWORD> && \
     docker ps -a | awk '{ print \$1,\$2 }' | grep $DOCKER_REPOSITORY | awk '{ print \$1 }' | xargs -I {} docker stop {} && \
     docker ps -a | awk '{ print \$1,\$2 }' | grep $DOCKER_REPOSITORY | awk '{ print \$1 }' | xargs -I {} docker rm {} && \
-    docker images -a | awk '{ print \$1, \$2 }' | grep '$DOCKER_HUB_REGISTRY/$DOCKER_REPOSITORY $VERSION' | awk '{ printf \"%s:%s\", \$1, \$2 }' | xargs -I {} docker rmi --force $DOCKER_HUB_IMAGE {} | true && \
+    docker images -a | awk '{ print \$1, \$2 }' | grep '$DOCKER_HUB_REGISTRY/$DOCKER_REPOSITORY $VERSION' | awk '{ printf \"%s:%s\", \$1, \$2 }' && \
     docker pull $DOCKER_HUB_IMAGE && \
     docker run -p 8080:8080 \
     --name $DOCKER_REPOSITORY \
